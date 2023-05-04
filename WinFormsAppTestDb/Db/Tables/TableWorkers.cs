@@ -44,5 +44,33 @@ namespace WinFormsAppTestDb.Db.Tables
 
             return workers;
         }
+
+        public void InsertNewWorker(Worker worker)
+        {
+            string sqlRequest = $"insert into workers (name, experience) values('{worker.Name}', {worker.Experience})";
+
+            NpgsqlCommand command = new NpgsqlCommand(sqlRequest, _connection);
+
+            command.ExecuteNonQuery();
+        }
+
+        public void DeleteWorkerById(int id)
+        {
+            string sqlRequest = $"delete from workers where id = {id}";
+
+            NpgsqlCommand command = new NpgsqlCommand(sqlRequest, _connection);
+
+            command.ExecuteNonQuery();
+        }
+
+        public void UpdateWorkerById(Worker worker, int id)
+        {
+            string sqlRequest = $"update workers set name = '{worker.Name}', experience = {worker.Experience} where id = {id}";
+
+            NpgsqlCommand command = new NpgsqlCommand(sqlRequest, _connection);
+
+            command.ExecuteNonQuery();
+        }
+
     }
 }
